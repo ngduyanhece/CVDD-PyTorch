@@ -36,8 +36,6 @@ class Spam_Dataset(TorchnlpDataset):
 
         train_idx_normal = []  # for subsetting train_set to normal class
         for i, row in enumerate(self.train_set):
-            print(row)
-        for i, row in enumerate(self.train_set):
             if any(label in self.normal_classes for label in row['label']) and (len(row['label']) == 1):
                 train_idx_normal.append(i)
                 row['label'] = torch.tensor(0)
@@ -56,11 +54,16 @@ class Spam_Dataset(TorchnlpDataset):
             else:
                 row['label'] = torch.tensor(1)
             row['text'] = row['text'].lower()
-        # Subset train_set to normal class
-        self.train_set = Subset(self.train_set, train_idx_normal)
-        # Subset test_set to selected normal and anomalous classes
-        self.test_set = Subset(self.test_set, test_idx)
 
+
+        # Subset train_set to normal class
+        #self.train_set = Subset(self.train_set, train_idx_normal)
+        # Subset test_set to selected normal and anomalous classes
+        #elf.test_set = Subset(self.test_set, test_idx)
+        for i, row in enumerate(self.train_set):
+            print(row)
+        for i, row in enumerate(self.test_set):
+            print(row)
         # Make corpus and set encoder
         text_corpus = [row['text'] for row in datasets_iterator(self.train_set, self.test_set)]
         if tokenizer == 'spacy':
