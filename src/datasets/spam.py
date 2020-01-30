@@ -122,4 +122,5 @@ def spam_dataset(directory='../data', train=True, test=False, clean_txt=False):
             'label': str(row['v1']),
         })
     ret.append(Dataset(examples))
+    print(tuple(ret))
     return tuple(ret)
