@@ -109,14 +109,14 @@ def spam_dataset(directory='../data', train=True, test=False, clean_txt=False):
     test = pd.read_csv(os.path.join(directory,'spam_test.csv'),header=None)
     ret = []
     examples = []
-    for row in train.rows:
+    for index, row in train.iterrows():
         examples.append({
             'text': row['v2'],
             'label': row['v1'],
         })
     ret.append(Dataset(examples))
     examples = []
-    for row in test.rows:
+    for index, row in test.iterrows():
         examples.append({
             'text': row['v2'],
             'label': row['v1'],
