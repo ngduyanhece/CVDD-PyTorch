@@ -36,6 +36,8 @@ class Spam_Dataset(TorchnlpDataset):
 
         train_idx_normal = []  # for subsetting train_set to normal class
         for i, row in enumerate(self.train_set):
+            print(row)
+        for i, row in enumerate(self.train_set):
             if any(label in self.normal_classes for label in row['label']) and (len(row['label']) == 1):
                 train_idx_normal.append(i)
                 row['label'] = torch.tensor(0)
