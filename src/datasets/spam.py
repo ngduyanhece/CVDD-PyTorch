@@ -22,9 +22,8 @@ class Spam_Dataset(TorchnlpDataset):
 
         self.n_classes = 2  # 0: normal, 1: outlier
         classes = ['ham', 'spam']
-        self.normal_classes = [classes[normal_class]]
-        del classes[normal_class]
-        self.outlier_classes = classes
+        self.normal_classes = ['ham']
+        self.outlier_classes = ['spam']
 
         # Load the reuters dataset
         self.train_set, self.test_set = spam_dataset(directory=root, train=True, test=True, clean_txt=clean_txt)
@@ -55,7 +54,6 @@ class Spam_Dataset(TorchnlpDataset):
             else:
                 row['label'] = torch.tensor(1)
             row['text'] = row['text'].lower()
-
         # Subset train_set to normal class
         self.train_set = Subset(self.train_set, train_idx_normal)
         # Subset test_set to selected normal and anomalous classes
@@ -86,9 +84,10 @@ class Spam_Dataset(TorchnlpDataset):
         # Get indices after pre-processing
         for i, row in enumerate(self.train_set):
             row['index'] = i
+            print(row)
         for i, row in enumerate(self.test_set):
             row['index'] = i
-
+            print(row)
 
 def spam_dataset(directory='../data', train=True, test=False, clean_txt=False):
     """
@@ -114,7 +113,6 @@ def spam_dataset(directory='../data', train=True, test=False, clean_txt=False):
             'text': str(row['v2']),
             'label': str(row['v1']),
         })
-    print(examples)
     ret.append(Dataset(examples))
     examples = []
     for index, row in test.iterrows():
@@ -122,6 +120,5 @@ def spam_dataset(directory='../data', train=True, test=False, clean_txt=False):
             'text': str(row['v2']),
             'label': str(row['v1']),
         })
-    print(examples)
     ret.append(Dataset(examples))
     return tuple(ret)
