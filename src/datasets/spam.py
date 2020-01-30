@@ -84,9 +84,11 @@ class Spam_Dataset(TorchnlpDataset):
         # Get indices after pre-processing
         for i, row in enumerate(self.train_set):
             row['index'] = i
+            print('train')
             print(row)
         for i, row in enumerate(self.test_set):
             row['index'] = i
+            print('test')
             print(row)
 
 def spam_dataset(directory='../data', train=True, test=False, clean_txt=False):
