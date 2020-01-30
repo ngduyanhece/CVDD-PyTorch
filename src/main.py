@@ -15,7 +15,7 @@ from datasets.main import load_dataset
 # Settings
 ################################################################################
 @click.command()
-@click.argument('dataset_name', type=click.Choice(['reuters', 'newsgroups20', 'imdb']))
+@click.argument('dataset_name', type=click.Choice(['reuters', 'newsgroups20', 'imdb', 'spam']))
 @click.argument('net_name', type=click.Choice(['cvdd_Net']))
 @click.argument('xp_path', type=click.Path(exists=True))
 @click.argument('data_path', type=click.Path(exists=True))
