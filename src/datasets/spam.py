@@ -48,9 +48,6 @@ class Spam_Dataset(TorchnlpDataset):
             if any(label in self.normal_classes for label in row['label']) and (len(row['label']) == 1):
                 test_idx.append(i)
                 row['label'] = torch.tensor(0)
-            elif any(label in self.outlier_classes for label in row['label']) and (len(row['label']) == 1):
-                test_idx.append(i)
-                row['label'] = torch.tensor(1)
             else:
                 row['label'] = torch.tensor(1)
             row['text'] = row['text'].lower()
