@@ -34,19 +34,17 @@ class Spam_Dataset(TorchnlpDataset):
         self.train_set.columns.add('weight')
         self.test_set.columns.add('weight')
 
-        train_idx_normal = []  # for subsetting train_set to normal class
+        #train_idx_normal = []  # for subsetting train_set to normal class
         for i, row in enumerate(self.train_set):
-            if any(label in self.normal_classes for label in row['label']) and (len(row['label']) == 1):
-                train_idx_normal.append(i)
+            if row['label'] =='ham':
                 row['label'] = torch.tensor(0)
             else:
                 row['label'] = torch.tensor(1)
             row['text'] = row['text'].lower()
 
-        test_idx = []  # for subsetting test_set to selected normal and anomalous classes
+        #test_idx = []  # for subsetting test_set to selected normal and anomalous classes
         for i, row in enumerate(self.test_set):
-            if any(label in self.normal_classes for label in row['label']) and (len(row['label']) == 1):
-                test_idx.append(i)
+            if row['label'] =='ham':
                 row['label'] = torch.tensor(0)
             else:
                 row['label'] = torch.tensor(1)
