@@ -105,21 +105,21 @@ def spam_dataset(directory='../data', train=True, test=False, clean_txt=False):
         is ``True``.
     """
     # read the train and test file
-    train = pd.read_csv(os.path.join(directory,'spam_train.csv'),header=None)
-    test = pd.read_csv(os.path.join(directory,'spam_test.csv'),header=None)
+    train = pd.read_csv(os.path.join(directory,'spam_train.csv'))
+    test = pd.read_csv(os.path.join(directory,'spam_test.csv'))
     ret = []
     examples = []
     for index, row in train.iterrows():
         examples.append({
-            'text': row['v2'],
-            'label': row['v1'],
+            'text': str(row['v2']),
+            'label': str(row['v1']),
         })
     ret.append(Dataset(examples))
     examples = []
     for index, row in test.iterrows():
         examples.append({
-            'text': row['v2'],
-            'label': row['v1'],
+            'text': str(row['v2']),
+            'label': str(row['v1']),
         })
     ret.append(Dataset(examples))
     return tuple(ret)
