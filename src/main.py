@@ -131,7 +131,7 @@ def main(dataset_name, net_name, xp_path, data_path, load_config, load_model, de
     # Load data
     dataset = load_dataset(dataset_name, data_path, normal_class, cfg.settings['tokenizer'],
                            clean_txt=cfg.settings['clean_txt'])
-
+    print(dataset)
     # Initialize CVDD model and set word embedding
     cvdd = CVDD(cfg.settings['ad_score'])
     cvdd.set_network(net_name=net_name,
